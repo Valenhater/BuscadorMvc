@@ -1,0 +1,72 @@
+﻿@model List<Jugador>
+
+@{
+    ViewData["Title"] = "Lista de Jugadores";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title">Búsqueda por Nombre</h3>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Jugadores" asp-action="Jugadores" method="get">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h3 class="card-title">Búsqueda por Posición</h3>
+            </div>
+            <div class="card-body">
+                <form asp-controller="Jugadores" asp-action="Jugadores" method="get">
+                    <div class="form-group">
+                        <label for="posicion">Posición:</label>
+                        <input type="text" id="posicion" name="posicion" class="form-control" />
+                    </div>
+                    <button type="submit" class="btn btn-success">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Nombre</th>
+                <th>Posición</th>
+                <th>Puntos por Partido</th>
+                <th>Rebotes por Partido</th>
+                <th>Asistencias por Partido</th>
+                <th>Imagen</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var jugador in Model)
+            {
+                <tr>
+                    <td>@jugador.Nombre</td>
+                    <td>@jugador.Posicion</td>
+                    <td>@jugador.PuntosPorPartido</td>
+                    <td>@jugador.RebotesPorPartido</td>
+                    <td>@jugador.AsistenciasPorPartido</td>
+                    <td>
+                        <img src="~/jugadores/@jugador.Imagen" alt="@jugador.Nombre" class="img-thumbnail" style="max-width: 100px; max-height: 100px;" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
